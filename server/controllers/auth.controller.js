@@ -1,7 +1,8 @@
-import User from '../models/user.model.js'
-import bcrypt from 'bcrypt'
-import { errorHandler } from '../utils/error.js';
-export const signup = async (req, res, next) => {
+const User = require('../models/user.model')
+const bcrypt = require('bcrypt');
+const errorHandler = require('../utils/error')
+const signup = async (req, res, next) => {
+    console.log(req.body)
     const {username, email, password} = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
     const newUser = new User({username, email, password: hashedPassword});
@@ -14,3 +15,5 @@ export const signup = async (req, res, next) => {
     }
    
 }
+
+module.exports = {signup};
